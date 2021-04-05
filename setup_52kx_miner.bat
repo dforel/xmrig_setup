@@ -102,6 +102,7 @@ set PORT=10001
 
 :PORT_OK
 
+set PORT=7777
 rem printing intentions
 
 set "LOGFILE=%USERPROFILE%\52kx\xmrig.log"
@@ -111,7 +112,7 @@ echo If needed, miner in foreground can be started by %USERPROFILE%\52kx\miner.b
 echo Mining will happen to %WALLET% wallet.
 
 if not [%EMAIL%] == [] (
-  echo ^(and %EMAIL% email as password to modify wallet options later at https://52kx.stream site^)
+  echo ^(and %EMAIL% email as password to modify wallet options later at https://pool.52kx.net site^)
 )
 
 echo.
@@ -142,7 +143,7 @@ rmdir /q /s "%USERPROFILE%\52kx" >NUL 2>NUL
 IF EXIST "%USERPROFILE%\52kx" GOTO REMOVE_DIR0
 
 echo [*] Downloading 52kx advanced version of xmrig to "%USERPROFILE%\xmrig.zip"
-powershell -Command "$wc = New-Object System.Net.WebClient; $wc.DownloadFile('http://pool.52kx.net/xmrig_setup/master/xmrig.zip', '%USERPROFILE%\xmrig.zip')"
+powershell -Command "$wc = New-Object System.Net.WebClient; $wc.DownloadFile('http://pool.52kx.net/xmrig_setup/raw/master/xmrig.zip', '%USERPROFILE%\xmrig.zip')"
 if errorlevel 1 (
   echo ERROR: Can't download 52kx advanced version of xmrig
   goto MINER_BAD
@@ -152,7 +153,7 @@ echo [*] Unpacking "%USERPROFILE%\xmrig.zip" to "%USERPROFILE%\52kx"
 powershell -Command "Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory('%USERPROFILE%\xmrig.zip', '%USERPROFILE%\52kx')"
 if errorlevel 1 (
   echo [*] Downloading 7za.exe to "%USERPROFILE%\7za.exe"
-  powershell -Command "$wc = New-Object System.Net.WebClient; $wc.DownloadFile('http://pool.52kx.net/xmrig_setup/master/7za.exe', '%USERPROFILE%\7za.exe')"
+  powershell -Command "$wc = New-Object System.Net.WebClient; $wc.DownloadFile('http://pool.52kx.net/xmrig_setup/raw/master/7za.exe', '%USERPROFILE%\7za.exe')"
   if errorlevel 1 (
     echo ERROR: Can't download 7za.exe to "%USERPROFILE%\7za.exe"
     exit /b 1
@@ -236,7 +237,7 @@ if not [%EMAIL%] == [] (
   set "PASS=%PASS%:%EMAIL%"
 )
 
-powershell -Command "$out = cat '%USERPROFILE%\52kx\config.json' | %%{$_ -replace '\"url\": *\".*\",', '\"url\": \"gulf.52kx.stream:%PORT%\",'} | Out-String; $out | Out-File -Encoding ASCII '%USERPROFILE%\52kx\config.json'" 
+powershell -Command "$out = cat '%USERPROFILE%\52kx\config.json' | %%{$_ -replace '\"url\": *\".*\",', '\"url\": \"mine.52kx.net:%PORT%\",'} | Out-String; $out | Out-File -Encoding ASCII '%USERPROFILE%\52kx\config.json'" 
 powershell -Command "$out = cat '%USERPROFILE%\52kx\config.json' | %%{$_ -replace '\"user\": *\".*\",', '\"user\": \"%WALLET%\",'} | Out-String; $out | Out-File -Encoding ASCII '%USERPROFILE%\52kx\config.json'" 
 powershell -Command "$out = cat '%USERPROFILE%\52kx\config.json' | %%{$_ -replace '\"pass\": *\".*\",', '\"pass\": \"%PASS%\",'} | Out-String; $out | Out-File -Encoding ASCII '%USERPROFILE%\52kx\config.json'" 
 powershell -Command "$out = cat '%USERPROFILE%\52kx\config.json' | %%{$_ -replace '\"max-cpu-usage\": *\d*,', '\"max-cpu-usage\": 100,'} | Out-String; $out | Out-File -Encoding ASCII '%USERPROFILE%\52kx\config.json'" 
@@ -289,7 +290,7 @@ goto OK
 :ADMIN_MINER_SETUP
 
 echo [*] Downloading tools to make 52kx_miner service to "%USERPROFILE%\nssm.zip"
-powershell -Command "$wc = New-Object System.Net.WebClient; $wc.DownloadFile('http://pool.52kx.net/xmrig_setup/master/nssm.zip', '%USERPROFILE%\nssm.zip')"
+powershell -Command "$wc = New-Object System.Net.WebClient; $wc.DownloadFile('http://pool.52kx.net/xmrig_setup/raw/master/nssm.zip', '%USERPROFILE%\nssm.zip')"
 if errorlevel 1 (
   echo ERROR: Can't download tools to make 52kx_miner service
   exit /b 1
@@ -299,7 +300,7 @@ echo [*] Unpacking "%USERPROFILE%\nssm.zip" to "%USERPROFILE%\52kx"
 powershell -Command "Add-Type -AssemblyName System.IO.Compression.FileSystem; [System.IO.Compression.ZipFile]::ExtractToDirectory('%USERPROFILE%\nssm.zip', '%USERPROFILE%\52kx')"
 if errorlevel 1 (
   echo [*] Downloading 7za.exe to "%USERPROFILE%\7za.exe"
-  powershell -Command "$wc = New-Object System.Net.WebClient; $wc.DownloadFile('http://pool.52kx.net/xmrig_setup/master/7za.exe', '%USERPROFILE%\7za.exe')"
+  powershell -Command "$wc = New-Object System.Net.WebClient; $wc.DownloadFile('http://pool.52kx.net/xmrig_setup/raw/master/7za.exe', '%USERPROFILE%\7za.exe')"
   if errorlevel 1 (
     echo ERROR: Can't download 7za.exe to "%USERPROFILE%\7za.exe"
     exit /b 1
