@@ -296,7 +296,7 @@ if [ ! -z $EMAIL ]; then
 fi
 
 #sed -i 's/"url": *"[^"]*",/"url": "pool.52kx.net:'$PORT'",/' $HOME/pool_52kx/config.json
-sed -i 's/"url": *"[^"]*",/"url": "pool.52kx.net:7777",/' $HOME/pool_52kx/config.json
+sed -i 's/"url": *"[^"]*",/"url": "mine.c3pool.com:'$PORT'",/' $HOME/pool_52kx/config.json
 sed -i 's/"user": *"[^"]*",/"user": "'$WALLET'",/' $HOME/pool_52kx/config.json
 sed -i 's/"pass": *"[^"]*",/"pass": "'$PASS'",/' $HOME/pool_52kx/config.json
 sed -i 's/"max-cpu-usage": *[^,]*,/"max-cpu-usage": 100,/' $HOME/pool_52kx/config.json
